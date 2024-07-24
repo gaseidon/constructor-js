@@ -1,0 +1,19 @@
+{
+  "name": "js_project",
+  "version": "1.0.0",
+  "description": "javascript pure application",
+  "main": "index.js",
+  "scripts": {
+    "serve": "parcel ./src/index.html -p 4200 --open",
+    "build": "parcel build ./src/index.html --no-source-maps"
+  },
+  "keywords": [
+    "js",
+    "javascript"
+  ],
+  "author": "Danil <danil_gasilow@mail.ru>",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
