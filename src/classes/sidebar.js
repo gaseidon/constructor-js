@@ -1,7 +1,8 @@
 import { block } from "../utils"
 import { TextBlock } from "./blocks"
 import { TitleBlock } from "./blocks"
-
+import { ColumnsBlock } from "./blocks"
+import { ImageBlock } from "./blocks"
 
 export class Sidebar {
     constructor(selector, updateCallback) {
@@ -16,7 +17,7 @@ export class Sidebar {
     }
 
     get template() {
-        return [block('text'), block('title')].join('')
+        return [block('text'), block('title'), block('columns'), block('image')].join('')
     }
 
     add(event) {
@@ -25,9 +26,18 @@ export class Sidebar {
         const type = event.target.name
         const value = event.target.value.value
         const styles = event.target.styles.value
-        const newBlock = type === "text"
-        ? new TextBlock(value, { styles })
-        :  new TitleBlock(value, { styles })
+        let newBlock
+        if (type === "text") {
+            newBlock = new TextBlock(value, { styles });
+        } else if (type === "title") {
+            newBlock = new TitleBlock(value, { styles });
+        } else if (type === "image") {
+            newBlock = new ImageBlock(value, { styles }); 
+        } else if (type === "columns") {
+            newBlock = new ColumnsBlock(value, { styles }); 
+        } else {
+            throw new Error("Unknown block type");
+        }
         this.update(newBlock)
         event.target.value.value = ""
         event.target.styles.value = ""
